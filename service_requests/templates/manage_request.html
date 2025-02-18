@@ -1,0 +1,21 @@
+<!-- templates/manage_request.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Manage Service Request</h2>
+
+<p><strong>Request Type:</strong> {{ request.request_type }}</p>
+<p><strong>Description:</strong> {{ request.description }}</p>
+<p><strong>Status:</strong> {{ request.status }}</p>
+<p><strong>Submitted At:</strong> {{ request.created_at }}</p>
+<p><strong>Resolved At:</strong> {{ request.resolved_at|default:"Not Resolved" }}</p>
+
+<h3>Update Status</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Status</button>
+</form>
+
+<a href="{% url 'track_request' %}">Back to Requests</a>
+{% endblock %}
